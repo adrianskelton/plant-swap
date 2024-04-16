@@ -1,4 +1,4 @@
-# Family Recipe
+# Plant Swap
 
 "Family Recipe" is a recipe sharing website made for my Portfolio Project 4 for code institute, where users can upload and share recipes as well as reading recipes from other users.
 
