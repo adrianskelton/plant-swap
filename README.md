@@ -1,8 +1,10 @@
 # Plant Swap
 
-"Family Recipe" is a recipe sharing website made for my Portfolio Project 4 for code institute, where users can upload and share recipes as well as reading recipes from other users.
+"Plant Swap" is an online community that is built on the idea of people swapping house plants with eachother in a safe manner by selecting cafes that can act as meeting points for swaps.
+The safety of our users and online community is key as they are essentially meeting strangers, we do this by giving tips on meeting and suggesting partner cafes to meet up at as well as being sensible when sharing personal information.
 
-I thought about this as I have a family recipe book from South Africa and I think it would be great to have a website where family members could share their family recipes with eachother and the world. I also wanted a rating system based on the amount of likes and a comment section for recipes. 
+I thought of this idea as the Swedish culture loves interiors and I do believe though the culture is quite sheltered and could be deemed shy and unspontanious (they do love a calender to plan social activities) this could be an easy way to connect, have a fika (another thing swedes love) and possibly make new friend or even more ❤
+
 
 ![image](static/images/readme/responsive.png)
 
