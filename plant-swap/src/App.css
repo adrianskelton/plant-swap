@@ -2,24 +2,29 @@
   text-align: center;
 }
 
+.mt-7 {
+  padding-top: 12.5rem !important;
+}
+
 .App-logo {
-  height: 160vmin;
+  max-height: 200px;  /* Set max height to prevent the logo from getting too large */
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: none;  /* Remove animation if not necessary */
   }
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 80px;  /* Ensure the header does not take up more than necessary space */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;  /* Change this if you want the logo and menu to be horizontally aligned */
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;  /* Spread out logo and menu */
+  padding: 10px 20px;  /* Add padding for spacing */
   font-size: calc(10px + 2vmin);
   color: white;
 }

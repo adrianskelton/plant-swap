@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Use Routes instead of Switch
 
@@ -40,17 +41,17 @@ function App() {
         {/* Navbar */}
         <Navbar bg="light" expand="lg" fixed="top">
           <Container>
-          <Navbar.Brand href="/">
-  <img
-    src={logo}
-    alt="Plant Swap Logo"
-    style={{
-      width: '100%',
-      height: 'auto',
-      maxWidth: '400px',  // Set max width to prevent the logo from growing too large
-    }}
-  />
-</Navbar.Brand>
+            <Navbar.Brand href="/">
+              <img
+                src={logo}
+                alt="Plant Swap Logo"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxWidth: '400px',  // Set max width to prevent the logo from growing too large
+                }}
+              />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
@@ -65,35 +66,38 @@ function App() {
         </Navbar>
 
         {/* Main Content */}
-        <Container className="mt-5 pt-5" style={{ paddingTop: '190px' }}>
-        <Routes>  {/* Use Routes instead of Switch */}
-            <Route path="/" element={<div>
-              <h1>Plant Swap Community</h1>
-              <p>Find plants to swap near you!</p>
+        <Container className="mt-7">
+          <Routes>
+            {/* Home Route */}
+            <Route path="/" element={
+              <div>
+                <h1>Plant Swap Community</h1>
+                <p>Find plants to swap near you!</p>
 
-              {/* Location Input */}
-              <Form inline>
-                <FormControl
-                  type="text"
-                  placeholder="Enter your location"
-                  value={location}
-                  onChange={e => setLocation(e.target.value)}
-                  className="mr-sm-2"
-                />
-                <Button variant="outline-success" onClick={() => setLocation(location)}>
-                  Search
-                </Button>
-              </Form>
+                {/* Location Input */}
+                <Form inline>
+                  <FormControl
+                    type="text"
+                    placeholder="Enter your location"
+                    value={location}
+                    onChange={e => setLocation(e.target.value)}
+                    className="mr-sm-2"
+                  />
+                  <Button variant="outline-success" onClick={() => setLocation(location)}>
+                    Search
+                  </Button>
+                </Form>
 
-              {/* Plant List */}
-              <ul className="mt-3">
-                {plants.map((plant, index) => (
-                  <li key={index}>
-                    <strong>{plant.name}</strong>: {plant.description}
-                  </li>
-                ))}
-              </ul>
-            </div>} />
+                {/* Plant List */}
+                <ul className="mt-3">
+                  {plants.map((plant, index) => (
+                    <li key={index}>
+                      <strong>{plant.name}</strong>: {plant.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            } />
             
             {/* Register Route */}
             <Route path="/register" element={<Register />} />
