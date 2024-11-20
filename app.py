@@ -49,7 +49,7 @@ def register():
         email=data['email'],
         password=hashed_password,
         location=data['location'],
-        avatar=data['avatar']  # selected avatar URL
+        avatar=data['avatar']  
     )
     db.session.add(user)
     db.session.commit()
