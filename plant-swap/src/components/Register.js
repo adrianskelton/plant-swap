@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const avatars = [
-  '/avatars/avatar1.png',  // Updated path
+  '/avatars/avatar1.png',  
   '/avatars/avatar2.png',
   '/avatars/avatar3.png',
   '/avatars/avatar4.png',

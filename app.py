@@ -65,6 +65,12 @@ def login():
         return jsonify(access_token=access_token)
     return jsonify({"message": "Invalid credentials!"}), 401
 
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()  # Retrieve all users
+    user_data = [{"username": user.username, "email": user.email, "location": user.location, "avatar": user.avatar} for user in users]
+    return jsonify(user_data)
+
 # Main entry point
 if __name__ == '__main__':
     initialize_database()  # Initialize the database before running the app
