@@ -33,11 +33,11 @@ def initialize_database():
 @app.route('/')
 def serve_react_app():
     # Serve the React app's index.html file
-    return send_from_directory('./plant-swap/build', 'index.html')
+    return send_from_directory(os.path.join(app.root_path, 'plant-swap/build'), 'index.html')
 
 @app.route('/static/<path:path>')
 def serve_static(path):
-    return send_from_directory('./plant-swap/build/static', path)
+    return send_from_directory(os.path.join(app.root_path, 'plant-swap/build/static'), path)
 
 # Register Route
 @app.route('/register', methods=['POST'])
