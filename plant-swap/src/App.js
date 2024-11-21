@@ -1,35 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
-import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-import logoWhite from './assets/logowhite.png';
-import logoBlack from './assets/logoblack.png';
+import logoWhite from "./assets/logowhite.png";
+import logoBlack from "./assets/logoblack.png";
 
-import Register from './components/Register';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+
+const apiUrl = process.env.REACT_APP_API_URL;
+axios.get(`${apiUrl}/api/user`);
 
 function App() {
   const [plants, setPlants] = useState([]);
-  const [location, setLocation] = useState('Stockholm');
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [location, setLocation] = useState("Stockholm");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [logo, setLogo] = useState(logoWhite);
   const [user, setUser] = useState(null); // Track user data
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/plants?location=${location}`)
-      .then(response => setPlants(response.data))
-      .catch(error => console.error(error));
+    axios
+      .get(`http://localhost:5000/api/plants?location=${location}`)
+      .then((response) => setPlants(response.data))
+      .catch((error) => console.error(error));
   }, [location]);
 
   useEffect(() => {
-    setLogo(theme === 'dark' ? logoBlack : logoWhite);
+    setLogo(theme === "dark" ? logoBlack : logoWhite);
 
     const fetchUser = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/user'); // Replace with actual user endpoint
+        const response = await axios.get("http://localhost:5000/api/user"); // Replace with actual user endpoint
         setUser(response.data);
       } catch {
         setUser(null);
@@ -40,9 +51,9 @@ function App() {
   }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -55,30 +66,43 @@ function App() {
                 src={logo}
                 alt="Plant Swap Logo"
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxWidth: '400px',
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "400px",
                 }}
               />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ml-auto">
+              <Nav className="ms-auto">
+                {" "}
+                {/* ms-auto to align Nav to the right */}
                 {!user ? (
                   <>
-                    <Nav.Link as={Link} to="/register">Register</Nav.Link>
-                    <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                    <Nav.Link as={Link} to="/register">
+                      Register
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/login">
+                      Login
+                    </Nav.Link>
                   </>
                 ) : (
                   <>
-                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                    <Button variant="outline-danger" onClick={() => setUser(null)}>
+                    <Nav.Link as={Link} to="/dashboard">
+                      Dashboard
+                    </Nav.Link>
+                    <Button
+                      variant="outline-danger"
+                      onClick={() => setUser(null)}
+                    >
                       Logout
                     </Button>
                   </>
                 )}
                 <Button variant="outline-dark" onClick={toggleTheme}>
-                  {theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+                  {theme === "light"
+                    ? "Switch to Dark Mode"
+                    : "Switch to Light Mode"}
                 </Button>
               </Nav>
             </Navbar.Collapse>
@@ -91,7 +115,7 @@ function App() {
               path="/"
               element={
                 <div>
-                  <h1>Welcome {user?.name || 'Guest'}!</h1>
+                  <h1>Welcome {user?.name || "Guest"}!</h1>
                   <p>A growing community of people who love plants.</p>
                   <p>Find plants to swap near you!</p>
 
@@ -103,12 +127,10 @@ function App() {
                       onChange={(e) => setLocation(e.target.value)}
                       className="mr-sm-2"
                     />
-                    <Button variant="outline-success">
-                      Search
-                    </Button>
+                    <Button variant="outline-success">Search</Button>
                   </Form>
 
-                  <ul className="mt-3">
+                  <ul className="mt-2">
                     {plants.map((plant, index) => (
                       <li key={index}>
                         <strong>{plant.name}</strong>: {plant.description}

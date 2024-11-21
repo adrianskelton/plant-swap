@@ -14,11 +14,13 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "react-scripts": "^3.0.1",
+    "watch": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-  "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-  "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "watch": "watch 'npm run build' ./",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
