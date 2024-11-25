@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, request, jsonify, send_from_directory, make_response
 from flask_jwt_extended import create_refresh_token, jwt_required, get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
@@ -7,6 +8,7 @@ from flask_jwt_extended import JWTManager, create_access_token
 from flask_cors import CORS
 from datetime import timedelta
 from flask_wtf.csrf import CSRFProtect
+CORS(app)
 
 
 app = Flask(__name__, static_folder='./plant-swap/build/static', static_url_path='/static')
@@ -14,6 +16,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plantswap.db'
 app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=15)  # Adjust as needed
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
+
+print(f"Current working directory: {os.getcwd()}")
 
 # Initialize extensions
 db = SQLAlchemy(app)
@@ -59,16 +63,20 @@ def serve_react_app():
 @app.route('/se.json')
 def get_cities():
     try:
-        # Open and load the se.json file
-        with open('se.json', 'r', encoding='utf-8') as file:
+        file_path = os.path.join(app.root_path, 'se.json')
+        print(f"Trying to load the file from: {file_path}")  # Log file path
+        
+        with open(file_path, 'r', encoding='utf-8') as file:
             cities = json.load(file)
+        
         return jsonify(cities)
     except Exception as e:
-        # Handle errors if the file is missing or invalid
+        print(f"Error: {str(e)}")  # Log the error to the console
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True)
+
 
 @app.route('/static/<path:path>')
 def serve_static(path):
