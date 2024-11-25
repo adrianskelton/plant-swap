@@ -18,8 +18,10 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 
-const apiUrl = process.env.REACT_APP_API_URL;
-axios.get(`${apiUrl}/api/user`);
+// Set Axios Defaults
+const API_BASE_URL = "https://5000-adrianskelton-plantswap-awfmdgwadct.ws-eu116.gitpod.io";
+axios.defaults.headers.common["Referrer-Policy"] = "no-referrer";
+axios.defaults.withCredentials = true;
 
 function App() {
   const [plants, setPlants] = useState([]);
@@ -30,7 +32,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/plants?location=${location}`)
+      .get(`/api/plants?location=${location}`) // No need to include the base URL here
       .then((response) => setPlants(response.data))
       .catch((error) => console.error(error));
   }, [location]);
@@ -40,7 +42,7 @@ function App() {
 
     const fetchUser = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user"); // Replace with actual user endpoint
+        const response = await axios.get(`/api/user`); // Base URL is already set
         setUser(response.data);
       } catch {
         setUser(null);
@@ -75,8 +77,6 @@ function App() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ms-auto">
-                {" "}
-                {/* ms-auto to align Nav to the right */}
                 {!user ? (
                   <>
                     <Nav.Link as={Link} to="/register">
